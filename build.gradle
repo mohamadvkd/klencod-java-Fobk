@@ -1,0 +1,20 @@
+// Root build.gradle
+// ملاحظة: repositories معرّفة في settings.gradle فقط.
+// لا نضع allprojects { repositories } هنا.
+
+plugins {
+    id 'com.android.application' version '8.5.2' apply false
+    id 'com.android.library' version '8.5.2' apply false
+}
+
+// ملاحظة: لا نغيّر rootProject.buildDir.
+// APK سيُنتج في المسار الافتراضي:
+//   app/build/outputs/apk/debug/app-debug.apk
+
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
